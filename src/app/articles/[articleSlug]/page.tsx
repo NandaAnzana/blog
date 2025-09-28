@@ -1,7 +1,18 @@
 import React from "react";
 import Script from "next/script";
 
-async function getArticle(slug: string) {
+type Article = {
+  article: string;
+  tags: Array<string>;
+  image: string;
+  timestamp: string;
+  title: string;
+  slug: string;
+  status: string;
+  edited: boolean;
+};
+
+async function getArticle(slug: string): Promise<Article> {
   const res = await fetch(
     process.env.NEXT_PUBLIC_API_URL + "/api/articles/slug/" + slug,
     {
@@ -13,15 +24,19 @@ async function getArticle(slug: string) {
       },
     }
   );
-  return res.json();
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+
+  const articleData: Article = await res.json();
+
+  return articleData;
 }
 
 const page = async ({
   params,
-  searchParams,
 }: {
   params: Promise<{ articleSlug: string }>;
-  searchParams: Promise<{ lang?: "en" | "id" }>;
 }) => {
   const { articleSlug } = await params;
   const data = await getArticle(articleSlug);
