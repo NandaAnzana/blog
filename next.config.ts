@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   output: "export",
   entry: {
     reactComponentAnnotation: {
-      enabled: false,
+      enabled: true,
     },
   },
 };
