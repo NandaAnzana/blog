@@ -12,6 +12,20 @@ type Article = {
   edited: boolean;
 };
 
+type Title = {
+  title: string;
+};
+
+export async function generateStaticParams() {
+  const articles: Array<Title> = await fetch(
+    process.env.NEXT_PUBLIC_API_URL + "/api/articles/all"
+  ).then((res) => res.json());
+
+  return articles.map((post) => ({
+    slug: post.title,
+  }));
+}
+
 async function getArticle(slug: string): Promise<Article> {
   const res = await fetch(
     process.env.NEXT_PUBLIC_API_URL + "/api/articles/slug/" + slug,
@@ -27,9 +41,7 @@ async function getArticle(slug: string): Promise<Article> {
   if (!res.ok) {
     throw new Error(`HTTP error! status: ${res.status}`);
   }
-
   const articleData: Article = await res.json();
-
   return articleData;
 }
 
