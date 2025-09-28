@@ -18,7 +18,15 @@ type Slugs = {
 
 export async function generateStaticParams() {
   const articles: Array<Slugs> = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "/api/articles/all"
+    process.env.NEXT_PUBLIC_API_URL + "api/articles/all",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "api-key " + process.env.NEXT_PUBLIC_API_KEY,
+        Accept: "application/json",
+      },
+    }
   ).then((res) => res.json());
 
   return articles.map((post) => ({
@@ -28,7 +36,7 @@ export async function generateStaticParams() {
 
 async function getArticle(slug: string): Promise<Article> {
   const res = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "/api/articles/slug/" + slug,
+    process.env.NEXT_PUBLIC_API_URL + "api/articles/slug/" + slug,
     {
       method: "GET",
       headers: {
