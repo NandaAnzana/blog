@@ -1,56 +1,37 @@
 import React from "react";
 import Script from "next/script";
-
-type Article = {
-  article: string;
-  tags: Array<string>;
-  image: string;
-  timestamp: string;
-  title: string;
-  slug: string;
-  status: string;
-  edited: boolean;
-};
-
-type Slugs = {
-  slug: string;
-};
+import { Metadata, ResolvingMetadata } from "next";
+import { Params } from "next/dist/server/request/params";
+import { ListSlugs } from "@/interfaces/articles";
+import { Props } from "@/interfaces/params";
+import { getAllArticles, getArticlebySlug } from "@/lib/api";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  const articles: Array<Slugs> = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "api/articles/all",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "api-key " + process.env.NEXT_PUBLIC_API_KEY,
-        Accept: "application/json",
-      },
-    }
-  ).then((res) => res.json());
-
+  const articles: ListSlugs = await getAllArticles();
   return articles.map((post) => ({
     articleSlug: post.slug,
   }));
 }
 
-async function getArticle(slug: string): Promise<Article> {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "api/articles/slug/" + slug,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "api-key " + process.env.NEXT_PUBLIC_API_KEY,
-        Accept: "application/json",
-      },
-    }
-  );
-  if (!res.ok) {
-    throw new Error(`HTTP error! status: ${res.status}`);
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { articleSlug } = await params;
+  if (!articleSlug) {
+    return notFound();
   }
-  const articleData: Article = await res.json();
-  return articleData;
+  const article = await getArticlebySlug(articleSlug);
+
+  const title = `${article.title} | Nanda's article`;
+
+  return {
+    title,
+    openGraph: {
+      title,
+    },
+  };
 }
 
 const page = async ({
@@ -59,7 +40,7 @@ const page = async ({
   params: Promise<{ articleSlug: string }>;
 }) => {
   const { articleSlug } = await params;
-  const data = await getArticle(articleSlug);
+  const data = await getArticlebySlug(articleSlug);
   const date = new Date(data.timestamp);
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -72,7 +53,7 @@ const page = async ({
       <h1 className="flex flex-col w-full font-bold text-[24px] md:text-[42px] text-center">
         {data.title}
       </h1>
-
+      {data.image && <img src={data.image} className="w-[95%] md:w-[50%]" />}
       <div className="flex flex-col text-gray-600">{formattedDate}</div>
       <div className="flex flex-row justify-center items-center gap-3 flex-wrap">
         {data.tags.map((val, ind) => (

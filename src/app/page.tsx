@@ -1,47 +1,9 @@
 import React from "react";
 import Link from "next/link";
-
-type Article = {
-  short: string;
-  tags: Array<string>;
-  image: string;
-  timestamp: string;
-  title: string;
-  slug: string;
-  status: string;
-  edited: boolean;
-};
-
-type CatArticles = {
-  tag: string;
-  articles: Array<Article>;
-};
-
-type ListCatArticles = Array<CatArticles>;
-
-async function getPosts(): Promise<ListCatArticles> {
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "api/articles/group/tags",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "api-key " + process.env.NEXT_PUBLIC_API_KEY,
-        Accept: "application/json",
-      },
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error(`HTTP error! status: ${res.status}`);
-  }
-
-  const userData: ListCatArticles = await res.json();
-  return userData;
-}
+import { getArticles } from "@/lib/api";
 
 const page = async () => {
-  const data = await getPosts();
+  const data = await getArticles();
   return (
     <div className="flex flex-col bg-white flex-1 w-full justify-start md:justify-center items-center gap-10 md:gap-20 overflow-y-scroll px-5 py-10 md:px-0 md:py-0">
       <div className="md:w-[700px]">
