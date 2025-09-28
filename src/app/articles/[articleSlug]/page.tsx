@@ -12,17 +12,17 @@ type Article = {
   edited: boolean;
 };
 
-type Title = {
-  title: string;
+type Slugs = {
+  slug: string;
 };
 
 export async function generateStaticParams() {
-  const articles: Array<Title> = await fetch(
+  const articles: Array<Slugs> = await fetch(
     process.env.NEXT_PUBLIC_API_URL + "/api/articles/all"
   ).then((res) => res.json());
 
   return articles.map((post) => ({
-    slug: post.title,
+    articleSlug: post.slug,
   }));
 }
 
