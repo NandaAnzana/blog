@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 type Article = {
   short: string;
@@ -55,15 +56,15 @@ const page = async () => {
             <h2 className="text-2xl">{val.tag}</h2>
             <div className="flex flex-col gap-2">
               {val.articles.map((article, ind_) => (
-                <a
+                <Link
                   href={`/articles/${article.slug}`}
                   key={`${ind}${ind_}`}
                   className="hover:font-semibold"
                 >
                   {article.title}
-                </a>
+                </Link>
               ))}
-              <a href="">more...</a>
+              <Link href="">more...</Link>
             </div>
           </div>
         ))}
