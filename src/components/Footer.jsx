@@ -7,7 +7,11 @@ const Footer = () => {
         <p>©2025</p>
         <p>
           Made with ♥️ by{" "}
-          <a href="https://app.nitomeyocard.com/me/nanda-anzana" className="underline" target="_blank">
+          <a
+            href="https://app.nitomeyocard.com/me/nanda-anzana"
+            className="underline"
+            target="_blank"
+          >
             Nanda Anzana
           </a>
         </p>
@@ -17,4 +21,3 @@ const Footer = () => {
 };
 
 export default Footer;
-np
