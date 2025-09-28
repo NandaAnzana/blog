@@ -25,7 +25,6 @@ const page = async ({
 }) => {
   const { articleSlug } = await params;
   const data = await getArticle(articleSlug);
-  const { lang = "en" } = await searchParams;
   const date = new Date(data.timestamp);
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -52,7 +51,7 @@ const page = async ({
       </div>
 
       <div className="w-[95%] md:w-[50%]">
-        <Script strategy="lazyOnload">
+        <Script strategy="lazyOnload" id="MathJax-config">
           {`window.MathJax = {
               tex: {
                 inlineMath: [['$', '$']],
