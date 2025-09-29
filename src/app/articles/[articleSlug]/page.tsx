@@ -58,8 +58,6 @@ const page = async ({
         <div>-</div>
         <div className="flex flex-col">{data.minutes} minutes read</div>
       </div>
-      {data.image && <img src={data.image} className="w-[95%] md:w-[50%]" />}
-
       <div className="flex flex-row justify-center items-center gap-3 flex-wrap">
         {data.tags.map((val, ind) => (
           <span
@@ -70,7 +68,7 @@ const page = async ({
           </span>
         ))}
       </div>
-
+      {data.image && <img src={data.image} className="w-[95%] md:w-[50%]" />}
       <div className="w-[95%] md:w-[50%]">
         <Script strategy="lazyOnload" id="MathJax-config">
           {`window.MathJax = {
