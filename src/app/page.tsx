@@ -7,11 +7,7 @@ const page = async () => {
   return (
     <div className="flex flex-col bg-white flex-1 w-full justify-start md:justify-center items-center gap-10 md:gap-20 overflow-y-scroll px-5 py-10 md:px-0 md:py-0">
       <div className="flex flex-col gap-2 justify-center items-center md:w-[700px]">
-        <img
-          src={"/images/logo.png"}
-          alt="Nanda's blog"
-          className="w-[100px]"
-        />
+        <img src={"images/logo.png"} alt="Nanda's blog" className="w-[100px]" />
         <div className="">
           Hi! 👋 I am Nanda Anzana, Im a data scientist. In my opinion, there
           are 3 steps of learning: read, write, and understand.{" "}
