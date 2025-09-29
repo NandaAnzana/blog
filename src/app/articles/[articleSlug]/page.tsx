@@ -54,7 +54,12 @@ const page = async ({
         {data.title}
       </h1>
       {data.image && <img src={data.image} className="w-[95%] md:w-[50%]" />}
-      <div className="flex flex-col text-gray-600">{formattedDate}</div>
+      <div className="flex flex-row gap-2 text-gray-600">
+        <div className="flex flex-col">{formattedDate}</div>
+        <div>-</div>
+        <div className="flex flex-col">{data.minutes} minutes read</div>
+      </div>
+
       <div className="flex flex-row justify-center items-center gap-3 flex-wrap">
         {data.tags.map((val, ind) => (
           <span

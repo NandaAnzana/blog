@@ -7,6 +7,7 @@ export type Article = {
   slug: string;
   status: string;
   edited: boolean;
+  minutes: number;
 };
 
 type Slugs = {
