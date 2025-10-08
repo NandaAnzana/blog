@@ -22,7 +22,7 @@ const Search: React.FC<SearchProps> = ({ searchString, setSearchString }) => {
         onChange={handleOnChange}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            window.location.replace("/search?q=" + searchString);
+            window.location.replace("/blog/search?q=" + searchString);
           }
         }}
       />
