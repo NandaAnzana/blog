@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
@@ -25,7 +26,7 @@ export default function RootLayout({
       <body className="flex flex-col w-[100vw] min-h-[100vh] bg-white overflow-y-scroll">
         <div id="modal-root"></div>
         <NavBar />
-        {children}
+        <Suspense>{children}</Suspense>
         <Footer />
       </body>
     </html>
