@@ -1,12 +1,14 @@
 export type Article = {
-  article: string;
+  article?: string;
   tags: Array<string>;
-  image: string;
+  image: string | null;
   timestamp: string;
   title: string;
   slug: string;
   status: string;
   edited: boolean;
+  short: string;
+  newsletter: string;
   minutes: number;
 };
 
@@ -22,3 +24,5 @@ type CatArticles = {
 };
 
 export type ListCatArticles = Array<CatArticles>;
+
+export type ListArticles = Array<Article>;

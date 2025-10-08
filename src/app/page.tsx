@@ -29,7 +29,7 @@ const page = async () => {
                   {article.title}
                 </Link>
               ))}
-              <Link href="">more...</Link>
+              <Link href={`/search?q=${val.tag}`}>more...</Link>
             </div>
           </div>
         ))}

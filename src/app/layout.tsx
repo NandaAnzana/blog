@@ -23,6 +23,7 @@ export default function RootLayout({
         ></script>
       </head>
       <body className="flex flex-col w-[100vw] min-h-[100vh] bg-white overflow-y-scroll">
+        <div id="modal-root"></div>
         <NavBar />
         {children}
         <Footer />
