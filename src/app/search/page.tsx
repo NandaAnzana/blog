@@ -8,7 +8,7 @@ import { ListArticles } from "@/interfaces/articles";
 import { formatDate } from "@/utils/date";
 import Link from "next/link";
 
-const page = () => {
+const SerachPage = () => {
   const searchParams = useSearchParams();
   const [searchString, setSearchString] = useState<string | null>(
     searchParams.get("q")
@@ -71,4 +71,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SerachPage;

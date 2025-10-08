@@ -4,7 +4,6 @@ import {
   ListSlugs,
   ListArticles,
 } from "@/interfaces/articles";
-import { List } from "postcss/lib/list";
 
 export async function getArticles(): Promise<ListCatArticles> {
   const res = await fetch(
