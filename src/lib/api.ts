@@ -68,33 +68,24 @@ export async function getArticlebySlug(slug: string): Promise<Article> {
 
 type CallbackFunction = (articles: ListArticles) => void;
 
-export async function searchArticle(q: string, setData: CallbackFunction) {
-  const article: Article = {
-    short:
-      'Recently I bought a book about marketing. I bought this used book "*Dasar-Dasar Marketing*" by Jerome McCarthy. In english version it called "Essentials of Marketing", I bought this book because I want to know a little bit about marketing, but I don\'t know the book was old. It first **published in 1...',
-    tags: ["marketing"],
-    image: "https://go.dev/doc/gopher/gopher5logo.jpg",
-    timestamp: "2025-10-04T17:03:35.472135Z",
-    title: "Essentials of Marketing by Jerome McCarthy",
-    slug: "ini-contoh-title-dengan-tags-learning-f17ba968",
-    status: "P",
-    edited: false,
-    minutes: 1,
-    newsletter: "fe23fa6c-d9b7-4150-8d81-2a3f05009456",
-  };
-  const article1: Article = {
-    short:
-      'Recently I bought a book about marketing. I bought this used book "*Dasar-Dasar Marketing*" by Jerome McCarthy. In english version it called "Essentials of Marketing", I bought this book because I want to know a little bit about marketing, but I don\'t know the book was old. It first **published in 1...',
-    tags: ["marketing"],
-    image: "https://go.dev/doc/gopher/gopher5logo.jpg",
-    timestamp: "2025-10-04T17:03:35.472135Z",
-    title: "Essentials of Marketing by Jerome McCarthy",
-    slug: "ini-contoh-title-dengan-tags-learning-f17ba968",
-    status: "P",
-    edited: false,
-    minutes: 1,
-    newsletter: "fe23fa6c-d9b7-4150-8d81-2a3f05009456",
-  };
-  const articles: ListArticles = [article, article1];
-  setData(articles);
+export function searchArticle(
+  q: string,
+  setData: CallbackFunction,
+  page: number = 1
+) {
+  fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}api/articles/search?q=${q}&page=${page}&size=5`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "api-key " + process.env.NEXT_PUBLIC_API_KEY,
+        Accept: "application/json",
+      },
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      setData(data.results);
+    });
 }

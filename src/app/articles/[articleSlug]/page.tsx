@@ -94,7 +94,13 @@ const page = async ({
 
         <article
           className="prose !max-w-none md:prose-2xl"
-          dangerouslySetInnerHTML={{ __html: data.article }}
+          dangerouslySetInnerHTML={
+            typeof data.article == "string"
+              ? {
+                  __html: data.article,
+                }
+              : { __html: "" }
+          }
         ></article>
       </div>
     </div>
