@@ -24,7 +24,7 @@ const SerachPage = () => {
   }, []);
   return (
     <div className="flex flex-col bg-white flex-1 w-full justify-start items-center gap-5 md:gap-20 overflow-y-scroll px-5 py-10 md:px-0 md:py-0">
-      <div className="flex flex-col gap-10 justify-center items-center md:w-[700px]">
+      <div className="flex flex-col gap-10 justify-center items-center md:w-[700px] w-full">
         <Search searchString={searchString} setSearchString={setSearchString} />
         <div className="flex flex-col gap-5 w-full justify-start mt-10 divide-y-2">
           {data.map((val, ind) => (
@@ -33,12 +33,12 @@ const SerachPage = () => {
               key={ind}
               className="flex flex-col gap-3 w-full pb-5"
             >
-              <div className="flex flex-row gap-3 justify-between">
-                <div className="flex flex-col gap-3 w-3/4">
+              <div className="flex flex-col-reverse md:flex-row md:justify-between w-full">
+                <div className="flex flex-col gap-3 w-full md:w-3/4">
                   <h2 className="font-semibold text-[24px]">{val.title}</h2>
                   <p>{val.short.slice(0, 100)}...</p>
                 </div>
-                <div className="w-1/4">
+                <div className="flex w-full md:w-1/4 justify-start md:justify-end">
                   {typeof val.image == "string" && (
                     <img
                       src={val.image}
