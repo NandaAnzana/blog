@@ -33,7 +33,7 @@ const SerachPage = () => {
               key={ind}
               className="flex flex-col gap-3 w-full pb-5"
             >
-              <div className="flex flex-col-reverse md:flex-row md:justify-between w-full">
+              <div className="flex flex-col-reverse gap-3 md:gap-0 md:flex-row md:justify-between w-full">
                 <div className="flex flex-col gap-3 w-full md:w-3/4">
                   <h2 className="font-semibold text-[24px]">{val.title}</h2>
                   <p>{val.short.slice(0, 100)}...</p>
@@ -43,7 +43,7 @@ const SerachPage = () => {
                     <img
                       src={val.image}
                       alt=""
-                      className="max-w-[200px] max-h-[200px]"
+                      className="max-w-[150px] max-h-[150px]"
                     />
                   )}
                 </div>
