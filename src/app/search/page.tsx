@@ -27,7 +27,7 @@ const SerachPage = () => {
       <div className="flex flex-col gap-10 justify-center items-center md:w-[700px] w-full">
         <Search searchString={searchString} setSearchString={setSearchString} />
         <div className="flex flex-col gap-5 w-full justify-start mt-10 divide-y-2">
-          {searchString && data.length > 0
+          {searchParams.get("q") && data.length > 0
             ? data.map((val, ind) => (
                 <Link
                   href={"/articles/" + val.slug}
@@ -70,7 +70,7 @@ const SerachPage = () => {
                   </div>
                 </Link>
               ))
-            : searchString && data.length == 0
+            : searchParams.get("q") && data.length == 0
             ? "No result found"
             : null}
         </div>
