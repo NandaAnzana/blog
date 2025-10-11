@@ -2,17 +2,24 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="flex flex-row justify-between px-10 md:px-40 py-3 md:py-5">
+    <div className="flex flex-row justify-between px-5 md:px-40 py-3 md:py-5">
       <div className="flex flex-row gap-1 md:gap-3">
-        <p>©2025</p>
         <p>
-          Made with ♥️ by{" "}
+          ©2025 Made with ♥️ by{" "}
           <a
             href="https://app.nitomeyocard.com/me/nanda-anzana"
             className="underline"
             target="_blank"
           >
             Nanda Anzana
+          </a>{" "}
+          & powered by{" "}
+          <a
+            href="https://agora-sp7f.onrender.com"
+            className="underline"
+            target="_blank"
+          >
+            Agora
           </a>
         </p>
       </div>
