@@ -24,7 +24,7 @@ const page = async () => {
                 <Link
                   href={`/articles/${article.slug}`}
                   key={`${ind}${ind_}`}
-                  className="hover:font-semibold"
+                  className="hover:text-green-300"
                 >
                   {article.title}
                 </Link>
