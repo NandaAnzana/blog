@@ -74,7 +74,7 @@ export async function getArticlebySlug(slug: string): Promise<Article> {
   if (!res.ok) {
     throw new Error(`HTTP error! status: ${res.status}`);
   }
-  let articleData: Article = await res.json();
+  const articleData: Article = await res.json();
   articleData.image = await fetchToBase64(articleData.image);
   return articleData;
 }
